@@ -415,8 +415,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **Microservices**: Backend service architecture
 
 ### Contact Information
-- **Repository**: [GitHub](https://github.com/Saymmughal/flutter_base_riverpod/flutter_base_riverpod)
-- **Issues**: [GitHub Issues](https://github.com/Saymmughal/flutter_base_riverpod/issues)
+- **Repository**: [GitHub](https://github.com/Saymmughal/flutter_base_provider/flutter_base_riverpod)
+- **Issues**: [GitHub Issues](https://github.com/Saymmughal/flutter_base_provider/issues)
 - **Email**: Saimmirzapk@gmail.com
 
 

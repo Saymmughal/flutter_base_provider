@@ -227,7 +227,7 @@ flutter_base_provider/
 ### Installation
 1. Clone the repository
    ```bash
-   git clone [flutter_base_provider](https://github.com/Saymmughal/flutter_base_provider.git)
+   git clone https://github.com/Saymmughal/flutter_base_provider.git
    cd flutter_base_provider
    ```
 

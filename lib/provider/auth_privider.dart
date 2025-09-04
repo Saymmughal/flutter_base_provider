@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_provider/helper/connection_manager.dart';
 import 'package:flutter_base_provider/data/repository/api_repo.dart';
 import 'package:flutter_base_provider/helper/router_navigator.dart';
 import 'package:flutter_base_provider/utils/env_configuration/env_config.dart';
@@ -51,11 +50,6 @@ class AuthProvider extends ChangeNotifier {
   Future<void> login() async {
     setLoading(true);
     Future.delayed(Duration(seconds: 3), () async {
-      bool isConnected = ConnectionManager().showInternetError();
-      if (!isConnected) {
-        setLoading(false);
-        return;
-      }
 
       debugPrint("isLoading: $isLoading");
       debugPrint("Login ==========================>>>");

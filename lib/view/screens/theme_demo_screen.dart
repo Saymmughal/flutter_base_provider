@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_provider/utils/app_styles/style.dart';
+import 'package:flutter_base_provider/utils/dimension.dart';
 import 'package:flutter_base_provider/view/widgets/extention/int_extension.dart';
 import 'package:flutter_base_provider/provider/theme_provider.dart';
+import 'package:flutter_base_provider/view/widgets/extention/widget_extension.dart';
 import 'package:flutter_base_provider/view/widgets/theme_toggle_widget.dart';
 import 'package:flutter_base_provider/view/widgets/extention/string_extension.dart';
 import 'package:flutter_base_provider/utils/app_styles/app_theme_colors.dart';
@@ -12,190 +14,196 @@ class ThemeDemoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return 
-    Consumer<ThemeProvider>(builder: (context, controller, child) =>
-    Scaffold(
-      appBar: AppBar(
-        title: 'Theme Demo'.toText(),
-        backgroundColor: AppThemeColors.getSurface(controller.currentThemeMode),
-        actions: [const ThemeToggleWidget(), 16.width],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Current Theme Info
-            Card(
-              color: AppThemeColors.getCardColor(controller.currentThemeMode),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    'Current Theme'.toText(
-                      fontSize: 20,
-                      fontWeight: AppStyle.w600,
-                    ),
-                    8.height,
-                    Row(
-                      children: [
-                        Icon(
-                          _getThemeIcon(controller.currentThemeMode),
-                          color: AppThemeColors.getPrimary(controller.currentThemeMode),
-                        ),
-                        16.width,
-                        _getThemeName(controller.currentThemeMode).toText(fontSize: 16),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            16.height,
-
-            // Typography Section
-            'Typography'.toText(fontSize: 18, fontWeight: AppStyle.w600),
-            16.height,
-            Card(
-              color: AppThemeColors.getCardColor(controller.currentThemeMode),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    'Display Large'.toText(
-                      fontSize: 32,
-                      fontWeight: AppStyle.w700,
-                    ),
-                    'Display Medium'.toText(
-                      fontSize: 28,
-                      fontWeight: AppStyle.w700,
-                    ),
-                    'Headline Large'.toText(
-                      fontSize: 22,
-                      fontWeight: AppStyle.w700,
-                    ),
-                    'Title Large'.toText(
-                      fontSize: 16,
-                      fontWeight: AppStyle.w700,
-                    ),
-                    'Body Large'.toText(fontSize: 16),
-                    'Body Medium'.toText(fontSize: 14),
-                    'Label Large'.toText(
-                      fontSize: 14,
-                      fontWeight: AppStyle.w500,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            16.height,
-
-            // Colors Section
-            'Colors'.toText(fontSize: 18, fontWeight: AppStyle.w600),
-            16.height,
-            Card(
-              color: AppThemeColors.getCardColor(controller.currentThemeMode),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildColorRow(
-                      'Primary',
-                      AppThemeColors.getPrimary(controller.currentThemeMode),
-                    ),
-                    _buildColorRow(
-                      'Secondary',
-                      AppThemeColors.getSecondary(controller.currentThemeMode),
-                    ),
-                    _buildColorRow(
-                      'Surface',
-                      AppThemeColors.getSurface(controller.currentThemeMode),
-                    ),
-                    _buildColorRow(
-                      'Surface',
-                      AppThemeColors.getSurface(controller.currentThemeMode),
-                    ),
-                    _buildColorRow(
-                      'Error',
-                      AppThemeColors.getError(controller.currentThemeMode),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            16.height,
-
-            // Components Section
-            'Components'.toText(fontSize: 18, fontWeight: AppStyle.w600),
-            16.height,
-            Card(
-              color: AppThemeColors.getCardColor(controller.currentThemeMode),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    TextField(
-                      decoration: const InputDecoration(
-                        labelText: 'Text Field',
-                        hintText: 'Enter text here',
+    return Consumer<ThemeProvider>(
+      builder: (context, controller, child) => Scaffold(
+        appBar: AppBar(
+          title: 'Theme Demo'.toText(),
+          backgroundColor: AppThemeColors.getSurface(
+            controller.currentThemeMode,
+          ),
+          actions: [const ThemeToggleWidget(), 16.width],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Current Theme Info
+              Card(
+                color: AppThemeColors.getCardColor(controller.currentThemeMode),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      'Current Theme'.toText(
+                        fontSize: 20,
+                        fontWeight: AppStyle.w600,
                       ),
-                    ),
-                  ],
+                      8.height,
+                      Row(
+                        children: [
+                          Icon(
+                            _getThemeIcon(controller.currentThemeMode),
+                            color: AppThemeColors.getPrimary(
+                              controller.currentThemeMode,
+                            ),
+                          ),
+                          16.width,
+                          _getThemeName(
+                            controller.currentThemeMode,
+                          ).toText(fontSize: 16),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            16.height,
+              16.height,
 
-            // Theme Toggle Section
-            'Theme Controls'.toText(fontSize: 18, fontWeight: AppStyle.w600),
-            16.height,
-            Card(
-              color: AppThemeColors.getCardColor(controller.currentThemeMode),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    'Use the theme toggle in the app bar to switch between themes:'
-                        .toText(fontSize: 14),
-                    16.height,
-                    Row(
-                      children: [
-                        const Icon(Icons.brightness_auto),
-                        16.width,
-                        'System - Follows device theme'.toText(fontSize: 14),
-                      ],
-                    ),
-                    8.height,
-                    Row(
-                      children: [
-                        const Icon(Icons.light_mode),
-                        16.width,
-                        'Light - Always light theme'.toText(fontSize: 14),
-                      ],
-                    ),
-                    8.height,
-                    Row(
-                      children: [
-                        const Icon(Icons.dark_mode),
-                        16.width,
-                        'Dark - Always dark theme'.toText(fontSize: 14),
-                      ],
-                    ),
-                  ],
+              // Typography Section
+              'Typography'.toText(fontSize: 18, fontWeight: AppStyle.w600),
+              16.height,
+              Card(
+                color: AppThemeColors.getCardColor(controller.currentThemeMode),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      'Display Large'.toText(
+                        fontSize: 32,
+                        fontWeight: AppStyle.w700,
+                      ),
+                      'Display Medium'.toText(
+                        fontSize: 28,
+                        fontWeight: AppStyle.w700,
+                      ),
+                      'Headline Large'.toText(
+                        fontSize: 22,
+                        fontWeight: AppStyle.w700,
+                      ),
+                      'Title Large'.toText(
+                        fontSize: 16,
+                        fontWeight: AppStyle.w700,
+                      ),
+                      'Body Large'.toText(fontSize: 16),
+                      'Body Medium'.toText(fontSize: 14),
+                      'Label Large'.toText(
+                        fontSize: 14,
+                        fontWeight: AppStyle.w500,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            32.height,
-          ],
+              16.height,
+
+              // Colors Section
+              'Colors'.toText(fontSize: 18, fontWeight: AppStyle.w600),
+              16.height,
+              Card(
+                color: AppThemeColors.getCardColor(controller.currentThemeMode),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildColorRow(
+                        'Primary',
+                        AppThemeColors.getPrimary(controller.currentThemeMode),
+                      ),
+                      _buildColorRow(
+                        'Secondary',
+                        AppThemeColors.getSecondary(
+                          controller.currentThemeMode,
+                        ),
+                      ),
+                      _buildColorRow(
+                        'Surface',
+                        AppThemeColors.getSurface(controller.currentThemeMode),
+                      ),
+                      _buildColorRow(
+                        'Surface',
+                        AppThemeColors.getSurface(controller.currentThemeMode),
+                      ),
+                      _buildColorRow(
+                        'Error',
+                        AppThemeColors.getError(controller.currentThemeMode),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              16.height,
+
+              // Components Section
+              'Components'.toText(fontSize: 18, fontWeight: AppStyle.w600),
+              16.height,
+              Card(
+                color: AppThemeColors.getCardColor(controller.currentThemeMode),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextField(
+                        decoration: const InputDecoration(
+                          labelText: 'Text Field',
+                          hintText: 'Enter text here',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              16.height,
+
+              // Theme Toggle Section
+              'Theme Controls'.toText(fontSize: 18, fontWeight: AppStyle.w600),
+              16.height,
+              Card(
+                color: AppThemeColors.getCardColor(controller.currentThemeMode),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      'Use the theme toggle in the app bar to switch between themes:'
+                          .toText(fontSize: 14),
+                      16.height,
+                      Row(
+                        children: [
+                          const Icon(Icons.brightness_auto),
+                          16.width,
+                          'System - Follows device theme'.toText(fontSize: 14),
+                        ],
+                      ),
+                      8.height,
+                      Row(
+                        children: [
+                          const Icon(Icons.light_mode),
+                          16.width,
+                          'Light - Always light theme'.toText(fontSize: 14),
+                        ],
+                      ),
+                      8.height,
+                      Row(
+                        children: [
+                          const Icon(Icons.dark_mode),
+                          16.width,
+                          'Dark - Always dark theme'.toText(fontSize: 14),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              32.height,
+            ],
+          ).paddingSymmetric(horizontal: isLandscapePossible ? 50.w : 20.w),
         ),
       ),
-    ),);
+    );
   }
 
   Widget _buildColorRow(String label, Color color) {

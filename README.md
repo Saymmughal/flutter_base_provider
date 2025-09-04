@@ -26,6 +26,7 @@ A comprehensive Flutter base project with Provider state management, featuring a
 - **Helper Classes** - Utility classes for common functionality
 - **Constants Management** - Centralized constant definitions
 - **Error Handling** - Comprehensive error handling and user feedback
+- **Performance Optimizations** - Cached calculations and background operations
 
 ## 🏗️ Project Structure
 
@@ -136,10 +137,11 @@ flutter_base_provider/
 ## 💾 Data Management
 
 ### Local Storage
-- **SharedPreferences**: Persistent local data storage
+- **SharedPreferences**: Persistent local data storage with performance optimizations
 - **User Data**: Login state, user information, tokens
 - **Theme Preferences**: Theme mode persistence
 - **FCM Tokens**: Push notification token storage
+- **Cached Operations**: Background thread operations to prevent main thread blocking
 
 ### Data Models
 - **Authentication Models**: Login, forgot password data structures
@@ -166,12 +168,15 @@ flutter_base_provider/
 - **Active Connection Check**: Verifies actual internet access
 - **User Feedback**: Informs users about connection status
 - **Error Handling**: Graceful handling of network issues
+- **Performance Optimized**: Debounced connection checks to prevent frame skipping
+- **Asynchronous UI Updates**: Non-blocking UI operations during connection changes
 
 ### Network Features
 - **Connectivity Detection**: WiFi, mobile, and no connection states
 - **Internet Validation**: Ensures actual internet access, not just network presence
 - **Stream-based Updates**: Real-time connection status updates
 - **User Notifications**: Clear feedback about network issues
+- **Smart Toast Management**: Proper toast dismissal and state management
 
 ## 🎯 State Management
 
@@ -186,6 +191,24 @@ flutter_base_provider/
 - **Persistence**: State saved across app sessions
 - **Reactive UI**: Automatic UI updates on state changes
 - **Clean Architecture**: Separation of concerns
+
+## ⚡ Performance Optimizations
+
+### Main Thread Optimization
+- **Cached Calculations**: Screen dimensions and font scaling cached to prevent repeated calculations
+- **Background Operations**: SharedPreferences and network operations run off main thread
+- **Debounced Checks**: Connection state changes debounced to prevent excessive network calls
+- **Asynchronous UI Updates**: UI operations scheduled after current frame to prevent blocking
+
+### Memory Management
+- **Smart Caching**: Dimension and font calculations cached with automatic invalidation
+- **Resource Cleanup**: Proper disposal of timers and streams
+- **Efficient State Management**: Optimized provider updates to reduce rebuilds
+
+### Performance Monitoring
+- **Frame Rate Tracking**: Real-time monitoring of dropped frames in debug mode
+- **Performance Metrics**: FPS and frame time monitoring
+- **Debug Logging**: Comprehensive logging for performance analysis
 
 ## 🛠️ Development Tools
 
@@ -304,6 +327,17 @@ final token = await LocalDb.getBearerToken;
 final userData = await LocalDb.getUserData;
 ```
 
+### Performance Monitoring
+```dart
+// Check performance metrics
+final metrics = PerformanceMonitor.instance.getPerformanceMetrics();
+PerformanceMonitor.instance.logPerformanceMetrics();
+
+// Connection management
+bool isConnected = ConnectionManager().isConnected;
+await ConnectionManager().refreshConnectionState();
+```
+
 ## 🧪 Testing
 
 ### Test Structure
@@ -407,6 +441,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **Code Generation**: Build-time code generation
 - **State Persistence**: Enhanced state persistence
 - **Offline Support**: Offline-first architecture
+- **Advanced Performance**: Further optimization for large-scale apps
 
 ### Architecture Improvements
 - **Repository Pattern**: Enhanced data layer

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_provider/utils/app_styles/style.dart';
-import 'package:flutter_base_provider/view/widgets/extention/int_extension.dart';
+import 'package:flutter_base_provider/utils/font_scaling_manager.dart';
 
 extension StringExtension on String {
   Widget toText({
@@ -18,13 +18,18 @@ extension StringExtension on String {
     textAlign: textAlign ?? textAlign,
     style: TextStyle(
       height: lineHeight,
-      backgroundColor: backgroundColor ?? backgroundColor,
+      backgroundColor: backgroundColor,
       color: color,
-      fontSize: (fontSize ?? 12).toInt().h,
-      fontFamily: AppStyle.poppins,
-      fontStyle: FontStyle.normal,
-      overflow: overflow ?? TextOverflow.ellipsis,
+      fontSize: FontScalingManager.instance.getScaledFontSize(fontSize ?? 12),
       fontWeight: fontWeight ?? AppStyle.w400, // By Default Regular Font
+      overflow: overflow ?? TextOverflow.ellipsis,
     ),
   );
+}
+
+extension FontSizeExtension on num {
+  double fsp() {
+    // Use optimized font scaling manager
+    return FontScalingManager.instance.getScaledFontSize(toDouble());
+  }
 }

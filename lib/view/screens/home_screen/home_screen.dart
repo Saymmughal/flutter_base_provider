@@ -2,11 +2,11 @@ import 'package:flutter_base_provider/helper/connection_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_provider/helper/provider_helper.dart';
 import 'package:flutter_base_provider/provider/home_provider.dart';
+import 'package:flutter_base_provider/utils/dimension.dart';
 import 'package:flutter_base_provider/view/widgets/extention/int_extension.dart';
 import 'package:flutter_base_provider/view/widgets/prrimary_button.dart';
 import 'package:flutter_base_provider/view/widgets/extention/string_extension.dart';
 import 'package:flutter_base_provider/view/widgets/extention/widget_extension.dart';
-import 'package:flutter_base_provider/view/widgets/theme_toggle_widget.dart';
 import 'package:flutter_base_provider/utils/app_styles/style.dart';
 import 'package:flutter_base_provider/utils/app_styles/app_theme_colors.dart';
 
@@ -35,14 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
-      builder: (context, controller, child) => Scaffold(
-        appBar: AppBar(
-          title: 'Home'.toText(fontSize: 18, fontWeight: AppStyle.w600),
-          centerTitle: true,
-          actions: [ThemeToggleWidget(), 8.width],
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(16),
+      builder: (context, controller, child) => SingleChildScrollView(
+        child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -80,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: PrimaryButton(
                               buttonName: 'Test Connection',
                               onPressed: () {
-                                ConnectionManager().showInternetError();
+                                ConnectionManager().checkInternetConnection();
                               },
                             ),
                           ),
@@ -100,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ],
-          ).center,
+          ).center.paddingSymmetric(horizontal: isLandscapePossible ? 40.w : 20.w),
         ),
       ),
     );

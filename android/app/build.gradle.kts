@@ -3,12 +3,15 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // START: FlutterFire Configuration
+    // id ("com.google.gms.google-services")
+    // END: FlutterFire Configuration
 }
 
 android {
     namespace = "com.example.flutter_base_provider"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -41,4 +44,14 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Import the BoM for the Firebase platform
+    // implementation(platform('com.google.firebase:firebase-bom:32.7.3'))
+    // Add the dependencies for the Firebase Cloud Messaging and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    // implementation('com.google.firebase:firebase-analytics')
+    // implementation('com.google.firebase:firebase-messaging:23.4.1')
+    // implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
 }

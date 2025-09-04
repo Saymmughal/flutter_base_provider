@@ -26,10 +26,3 @@ extension StringExtension on String {
     ),
   );
 }
-
-extension FontSizeExtension on num {
-  double fsp() {
-    // Use optimized font scaling manager
-    return FontScalingManager.instance.getScaledFontSize(toDouble());
-  }
-}
